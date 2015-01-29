@@ -26,7 +26,9 @@ shopt -s checkwinsize
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+# End Ubuntu boilerplate stuff
 
+# Do any customizations specific to this machine (or things you don't want in source control.)
 if [ -f .localrc ]
 then
 	source .localrc
@@ -34,40 +36,4 @@ fi
 
 export PS1="\[\033]0;\$TERMTITLE\007\]\[\033[00;31m\]\n\u@\h\[\033[00m\]\n\[\033[00;36m\]\$(__git_ps1 \"[%s] \")\w\[\033[00m\] > "
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-function hex {
- for num in $@
- do
-  echo "obase=16;${num}" | bc
- done
-}
-
-function bin {
- for num in $@
- do
-  echo "obase=2;${num}" | bc
- done
-}
-
-function dec {
- for num in $@
- do
-  echo "ibase=16;obase=A;${num}" | bc
- done
-}
-
-function cal() { [[ -z $2 && $1 -le 12 && $1 -gt 0 ]] && command cal $1 $(date +%Y) || command cal $@; }
-
-# Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
