@@ -89,7 +89,7 @@
 ;; (eval-after-load "color-theme"
 ;;   '(progn
 ;;      (color-theme-solarized-light)))
-(load-theme 'solarized-light t)
+;;(load-theme 'solarized-light t)
 (defun maxpage ()
   (interactive)
   (load-theme 'solarized-dark t))
