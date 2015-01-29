@@ -35,3 +35,15 @@ else
 EOF
 fi
 
+if [ "$(uname -s)" == "Darwin" ]
+then
+    PROFILE=$HOME/.bash_profile
+    if [ -e $PROFILE ]
+    then
+        echo "Unable to create $PROFILE, already exists"
+    else
+        cat > $PROFILE <<EOF
+source .bashrc
+EOF
+    fi
+fi
