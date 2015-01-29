@@ -10,7 +10,15 @@
     st = status
     ri = "!f() { git rebase -i --autosquash HEAD~$1; }; f"
     br = branch
-    pending = log production/master..master --pretty=format:'[%h] <%an> %d %s (%cr)' --abbrev-commit --date=relative
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	glog = log --graph
+    pending = "!f() { repo=$1; if [ "y$repo" = "y" ]; then repo=production; fi; git log $repo/master..master --pretty=format:'[%h] <%an> %d %s (%cr)' --abbrev-commit --date=relative; }; f"
 	reltag = "!f() { git fetch --tags; dte=`date +%Y%m%d`; prev=`git tag | grep $dte | sort | tail -n 1 | grep -oE [0-9]+$`; if [ y$prev = y ]; then prev=0; fi; dte=$dte.`expr $prev + 1`; git tag $dte; echo "New tag: $dte"; }; f"
+    amend = commit --amend -C HEAD
+    diffhead = diff HEAD^..HEAD
+[push]
+    default = upstream
 [rebase]
-	autosquash =
+	autosquash = true
