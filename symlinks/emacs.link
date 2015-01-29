@@ -1,34 +1,54 @@
 ;; Bring in Emacs' common lisp, we need it for the loop macros that rails-mode uses
 (require 'cl)
+(require 'package)
+
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(tool-bar-mode -1)
 
 (add-to-list 'load-path "~/.emacs.d/")
 (let ((default-directory "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 (let ((default-directory "/usr/share/emacs/site-lisp/emacs-goodies-el/"))
   (normal-top-level-add-subdirs-to-load-path))
 
 ;;(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-goodies-el/")
 
+(setq indent-tabs-mode nil)
 (setq default-buffer-file-coding-system nil)
 (setq default-tab-width 4)
 
 (global-set-key "\C-a" 'back-to-indentation)
+(global-set-key "\M-m" 'move-beginning-of-line)
 
 ;; ===== Ruby ==========
 (require 'ruby-mode)
+(add-to-list 'auto-mode-alist '("\\*ruby\\*\\'" . python-mode))
+(setq ruby-insert-encoding-magic-comment nil)
 (load-file "~/.emacs.d/inf-ruby.el")
 (autoload 'run-ruby "inf-ruby")
 (autoload 'inf-ruby-keys "inf-ruby" "" t)
 (eval-after-load 'ruby-mode
   '(add-hook 'ruby-mode-hook 'inf-ruby-keys))
+(require 'rcodetools)
+(add-hook 'ruby-mode-hook
+ (lambda ()
+   (define-key ruby-mode-map (kbd "<f5>") 'xmp)
+   (electric-pair-mode)
+   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+ )
+)
 (require 'rails)
-(require 'rhtml-mode)
+;;(require 'rhtml-mode)
 (require 'ruby-end)
 (setq ruby-end-insert-newline nil)
-(add-hook 'ruby-mode-hook
-  (lambda ()
-	;;(electric-pair-mode)
-	(add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 ;; Customizations for aisle50 src
 (eval-after-load 'rails
@@ -44,12 +64,38 @@
 	 (rails-find:gen "spec-interactors" "spec/interactors")
 	 (define-key rails-minor-mode-map (kbd "C-c C-c f r i") 'rails-find:spec-interactors)
 	 (rails-find:gen "factories" "factories")
-	 (define-key rails-minor-mode-map (kbd "C-c C-c f r f") 'rails-find:spec-factories)))
+	 (define-key rails-minor-mode-map (kbd "C-c C-c f r f") 'rails-find:spec-factories)
+     (rails-find:gen "spec-lib" "spec/lib")
+     (define-key rails-minor-mode-map (kbd "C-c C-c f r b") 'rails-find:spec-lib)
+     (define-key rails-minor-mode-map (kbd "C-c C-s") nil)))
 
+;; ===== Web Mode ====
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(eval-after-load 'web-mode
+  '(progn
+     (define-key web-mode-map (kbd "C-c C-n")   'web-mode-tag-match)
+     (define-key web-mode-map (kbd "C-c C-p")   'web-mode-element-parent)))
 
 ;; ===== Magit =========
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; ===== Solarized Theme =====
+;;(require 'color-theme)
+;;(require 'color-theme-solarized)
+;; (eval-after-load "color-theme"
+;;   '(progn
+;;      (color-theme-solarized-light)))
+(load-theme 'solarized-light t)
+(defun maxpage ()
+  (interactive)
+  (load-theme 'solarized-dark t))
+(defun un-maxpage ()
+  (interactive)
+  (load-theme 'solarized-light t))
 
 ;; ===== JavaScript ====
 ;; https://github.com/mooz/js2-mode
@@ -157,6 +203,8 @@
   ;; If there is more than one, they won't work right.
  '(fill-column 80)
  '(inhibit-startup-screen t)
+ '(indent-tabs-mode nil)
+ '(magit-status-show-tags nil)
  '(js2-basic-offset 4))
 
 (custom-set-faces
