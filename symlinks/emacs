@@ -1,0 +1,169 @@
+;; Bring in Emacs' common lisp, we need it for the loop macros that rails-mode uses
+(require 'cl)
+
+(add-to-list 'load-path "~/.emacs.d/")
+(let ((default-directory "~/.emacs.d/"))
+  (normal-top-level-add-subdirs-to-load-path))
+(let ((default-directory "/usr/share/emacs/site-lisp/emacs-goodies-el/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
+;;(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-goodies-el/")
+
+(setq default-buffer-file-coding-system nil)
+(setq default-tab-width 4)
+
+(global-set-key "\C-a" 'back-to-indentation)
+
+;; ===== Ruby ==========
+(require 'ruby-mode)
+(load-file "~/.emacs.d/inf-ruby.el")
+(autoload 'run-ruby "inf-ruby")
+(autoload 'inf-ruby-keys "inf-ruby" "" t)
+(eval-after-load 'ruby-mode
+  '(add-hook 'ruby-mode-hook 'inf-ruby-keys))
+(require 'rails)
+(require 'rhtml-mode)
+(require 'ruby-end)
+(setq ruby-end-insert-newline nil)
+(add-hook 'ruby-mode-hook
+  (lambda ()
+	;;(electric-pair-mode)
+	(add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; Customizations for aisle50 src
+(eval-after-load 'rails
+  '(progn
+	 (rails-find:gen "stylesheets" "app/assets/stylesheets")
+	 (rails-find:gen "javascripts" "app/assets/javascripts")
+	 (rails-find:gen "admin" "app/admin")
+	 (define-key rails-minor-mode-map (kbd "C-c C-c f a") 'rails-find:admin)
+	 (rails-find:gen "interactors" "interactors")
+	 (define-key rails-minor-mode-map (kbd "C-c C-c f i") 'rails-find:interactors)
+	 (rails-find:gen "mailers" "app/mailers")
+	 (define-key rails-minor-mode-map (kbd "C-c C-c f n") 'rails-find:mailers)
+	 (rails-find:gen "spec-interactors" "spec/interactors")
+	 (define-key rails-minor-mode-map (kbd "C-c C-c f r i") 'rails-find:spec-interactors)
+	 (rails-find:gen "factories" "factories")
+	 (define-key rails-minor-mode-map (kbd "C-c C-c f r f") 'rails-find:spec-factories)))
+
+
+;; ===== Magit =========
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; ===== JavaScript ====
+;; https://github.com/mooz/js2-mode
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; Use spaces, not tabs
+(defun my-js2-mode-hook ()
+  (set-variable 'indent-tabs-mode nil))
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+;; ===== CoffeeScript ======
+(require 'coffee-mode)
+
+;; ===== Python =====
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
+(add-hook 'python-mode-hook
+	  (lambda ()
+		(setq indent-tabs-mode nil)
+	    (set (make-variable-buffer-local 'beginning-of-defun-function)
+		 'py-beginning-of-def-or-class)
+	    (setq outline-regexp "def\\|class ")))
+
+(load "/home/bschmeck/.emacs.d/python-mode.el-6.0.3/python-mode.el")
+(require 'python-mode)
+
+(defun bash ()
+  "Start 'bash' shell."
+  (let ((binary-process-input t)
+	(binary-process-output nil))
+    (shell)))
+(setq process-coding-system-alist
+      (cons '("bash" . (raw-text-dos . raw-text-unix)) process-coding-system-alist))
+
+;; ===== SLIME =====
+;;(setq inferior-lisp-program "clisp")
+;;(add-to-list 'load-path "c:/cygwin/usr/local/slime")
+;;(require 'slime-autoloads)
+;;(slime-setup)
+
+;; ===== For C code, use BSD style =====
+(setq c-default-style "bsd")
+(setq c-label-offset -4)
+(setq c-basic-offset 4)
+(setq c-auto-newline nil)
+
+(defun fill-column-hook ()
+  (setq set-fill-column 80)
+  (c-set-offset 'arglist-intro 'c-lineup-arglist-indent-newline)
+  (c-set-offset 'arglist-cont-nonempty 'c-lineup-arglist-indent-newline)
+  (c-set-offset 'arglist-cont 'c-lineup-arglist-indent-newline)
+  (c-set-offset 'statement-cont 'c-lineup-arglist-indent-newline))
+(defun c-mode-funs ()
+  (auto-fill-mode t)
+  (set-variable 'indent-tabs-mode nil))
+(defun my-java-mode-hook ()
+  (setq c-basic-offset 4))
+
+(add-hook 'c-mode-hook 'fill-column-hook)
+(add-hook 'c-mode-hook 'c-mode-funs)
+(add-hook 'java-mode-hook 'my-java-mode-hook)
+(defun c-lineup-arglist-indent-newline (langelem)
+  "Works with arglist-intro"
+  (save-excursion
+    (beginning-of-line)
+    (previous-line 1)
+    (beginning-of-line-text)
+    (vector (+ (current-column) 4))))
+
+;; ===== Set the highlight current line minor mode =====
+
+;; In every buffer, the line which contains the cursor will be fully
+;; highlighted
+(global-hl-line-mode 1)
+;; Turn on Colorized Fonts
+(global-font-lock-mode t)
+
+;; ===== Solarized color theme =====
+(require 'color-theme)
+(require 'color-theme-solarized)
+(eval-after-load "color-theme"
+  '(progn
+	 (color-theme-solarized-light)))
+
+;; ===== Set standard indent to 4 rather that 8 ====
+(setq standard-indent 8)
+
+;; ========== Enable Line and Column Numbering ==========
+;; Show line-number in the mode line
+(line-number-mode 1)
+
+;; Show column-number in the mode line
+(column-number-mode 1)
+
+;; ========== Navigation Shortcuts ======================
+(global-set-key (kbd "M-g") 'goto-line)   ; use Meta-g for goto-line
+(global-set-key (kbd "C-z") 'undo)
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(fill-column 80)
+ '(inhibit-startup-screen t)
+ '(js2-basic-offset 4))
+
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+
+(display-time)

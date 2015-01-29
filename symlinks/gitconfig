@@ -1,0 +1,16 @@
+[user]
+	name = Ben Schmeckpeper
+	email = ben.schmeckpeper@gmail.com
+[core]
+	editor = emacs -nw
+	excludesfile = /home/bschmeck/.gitignore_global
+[alias]
+	co = checkout
+    ci = commit
+    st = status
+    ri = "!f() { git rebase -i --autosquash HEAD~$1; }; f"
+    br = branch
+    pending = log production/master..master --pretty=format:'[%h] <%an> %d %s (%cr)' --abbrev-commit --date=relative
+	reltag = "!f() { git fetch --tags; dte=`date +%Y%m%d`; prev=`git tag | grep $dte | sort | tail -n 1 | grep -oE [0-9]+$`; if [ y$prev = y ]; then prev=0; fi; dte=$dte.`expr $prev + 1`; git tag $dte; echo "New tag: $dte"; }; f"
+[rebase]
+	autosquash =

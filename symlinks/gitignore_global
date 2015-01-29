@@ -1,0 +1,9 @@
+# Emacs autosave
+*~
+
+# Compiled Objects
+*.o
+*.pyc
+
+
+
