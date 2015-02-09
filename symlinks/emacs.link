@@ -81,20 +81,6 @@
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; ===== Solarized Theme =====
-;;(require 'color-theme)
-;;(require 'color-theme-solarized)
-;; (eval-after-load "color-theme"
-;;   '(progn
-;;      (color-theme-solarized-light)))
-;;(load-theme 'solarized-light t)
-(defun maxpage ()
-  (interactive)
-  (load-theme 'solarized-dark t))
-(defun un-maxpage ()
-  (interactive)
-  (load-theme 'solarized-light t))
-
 ;; ===== JavaScript ====
 ;; https://github.com/mooz/js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
@@ -173,13 +159,6 @@
 ;; Turn on Colorized Fonts
 (global-font-lock-mode t)
 
-;; ===== Solarized color theme =====
-(require 'color-theme)
-(require 'color-theme-solarized)
-(eval-after-load "color-theme"
-  '(progn
-	 (color-theme-solarized-light)))
-
 ;; ===== Set standard indent to 4 rather that 8 ====
 (setq standard-indent 8)
 
@@ -213,3 +192,14 @@
  )
 
 (display-time)
+;; Solarized Theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+(load-theme 'solarized t)
+(defun maxpage ()
+  (interactive)
+  (load-theme 'solarized-dark t))
+(defun un-maxpage ()
+  (interactive)
+  (load-theme 'solarized-light t))
+
