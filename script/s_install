@@ -19,7 +19,7 @@ cd $HOME
 DIR=$HOME/.dotfiles/symlinks
 for src in $DIR/*.link
 do
-    dest=$HOME/.$(basename --suffix=.link $src)
+    dest=$HOME/.$(basename -s .link $src)
 	link_file $src $dest
 done
 
