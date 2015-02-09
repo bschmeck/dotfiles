@@ -6,6 +6,6 @@ More concise organization, all bash scripts are stored in the top level director
 
 The repo expects to live in ~/.dotfiles.
 
-Running `script/install` will create symlinks for everything in `symlinks/` and create an empty `~/.localrc` for machine specific and private configuration (e.g. API keys you don't want to commit to source control.)
+Running `script/s_install` will create symlinks for everything in `symlinks/` and create an empty `~/.localrc` for machine specific and private configuration (e.g. API keys you don't want to commit to source control.)
 
 The provided bashrc will source any bash scripts (files ending in .bash) in `~/.dotfiles/`
