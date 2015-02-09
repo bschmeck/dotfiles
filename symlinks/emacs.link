@@ -30,7 +30,7 @@
 (require 'ruby-mode)
 (add-to-list 'auto-mode-alist '("\\*ruby\\*\\'" . python-mode))
 (setq ruby-insert-encoding-magic-comment nil)
-(load-file "~/.emacs.d/inf-ruby.el")
+;;(load-file "inf-ruby.el")
 (autoload 'run-ruby "inf-ruby")
 (autoload 'inf-ruby-keys "inf-ruby" "" t)
 (eval-after-load 'ruby-mode
@@ -105,7 +105,7 @@
 		 'py-beginning-of-def-or-class)
 	    (setq outline-regexp "def\\|class ")))
 
-(load "/home/bschmeck/.emacs.d/python-mode.el-6.0.3/python-mode.el")
+;;(load "/home/bschmeck/.emacs.d/python-mode.el-6.0.3/python-mode.el")
 (require 'python-mode)
 
 (defun bash ()
