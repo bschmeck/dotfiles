@@ -3,7 +3,7 @@
 	email = ben.schmeckpeper@gmail.com
 [core]
 	editor = emacs -nw
-	excludesfile = /home/bschmeck/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
 	co = checkout
     ci = commit
