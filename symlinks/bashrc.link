@@ -28,6 +28,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 # End Ubuntu boilerplate stuff
 
+# Enable bash_completion in OSX.
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
 # Do any customizations specific to this machine (or things you don't want in source control.)
 if [ -f .localrc ]
 then
