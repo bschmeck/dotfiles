@@ -2,7 +2,7 @@
 	name = Ben Schmeckpeper
 	email = ben.schmeckpeper@gmail.com
 [core]
-	editor = emacs -nw
+	editor = emacs -nw -q
 	excludesfile = ~/.gitignore_global
 [alias]
 	co = checkout
