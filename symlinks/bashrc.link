@@ -34,9 +34,9 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 # Do any customizations specific to this machine (or things you don't want in source control.)
-if [ -f .localrc ]
+if [ -f $HOME/.localrc ]
 then
-	source .localrc
+	source $HOME/.localrc
 fi
 
 # Load in any BASH scripts in the $HOME/.dotfiles directory
