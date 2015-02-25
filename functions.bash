@@ -20,3 +20,5 @@ function dec {
 }
 
 function cal() { [[ -z $2 && $1 -le 12 && $1 -gt 0 ]] && command cal $1 $(date +%Y) || command cal $@; }
+
+function x_title() { export TERMTITLE="$@"; }
