@@ -30,11 +30,7 @@
 (require 'ruby-mode)
 (add-to-list 'auto-mode-alist '("\\*ruby\\*\\'" . python-mode))
 (setq ruby-insert-encoding-magic-comment nil)
-;;(load-file "inf-ruby.el")
 (autoload 'run-ruby "inf-ruby")
-(autoload 'inf-ruby-keys "inf-ruby" "" t)
-(eval-after-load 'ruby-mode
-  '(add-hook 'ruby-mode-hook 'inf-ruby-keys))
 (require 'rcodetools)
 (add-hook 'ruby-mode-hook
  (lambda ()
