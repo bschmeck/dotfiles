@@ -183,6 +183,7 @@
  '(inhibit-startup-screen t)
  '(js2-basic-offset 4)
  '(magit-status-show-tags nil)
+ '(rails-rake-use-bundler-when-possible nil)
  '(vc-follow-symlinks t))
 
 (custom-set-faces
