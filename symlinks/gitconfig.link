@@ -18,6 +18,7 @@
 	reltag = "!f() { git fetch --tags; dte=`date +%Y%m%d`; prev=`git tag | grep $dte | sort | tail -n 1 | grep -oE [0-9]+$`; if [ y$prev = y ]; then prev=0; fi; dte=$dte.`expr $prev + 1`; git tag $dte; echo "New tag: $dte"; }; f"
     amend = commit --amend -C HEAD
     diffhead = diff HEAD^..HEAD
+    sdiff = "!f() { cd ${GIT_PREFIX:-} && GIT_EXTERNAL_DIFF=$HOME/git-funcs/sdiff git diff "$@"; }; f"
 [push]
     default = upstream
 [rebase]
