@@ -63,6 +63,25 @@
      (define-key rails-minor-mode-map (kbd "C-c C-c f r b") 'rails-find:spec-lib)
      (define-key rails-minor-mode-map (kbd "C-c C-s") nil)))
 
+(defun ruby-buffer ()
+  "Switch to a ruby buffer."
+  (interactive)
+  (let* ((buffer-name "*ruby*")
+         (require "require 'rspec/autorun'")
+         (newline "\n")
+         (rspec-block (list "RSpec.describe do" newline newline "end"))
+         (boilerplate (apply #'append (list require (make-list 4 newline) rspec-block)))
+         (buf (get-buffer-create "*ruby*")))
+    (switch-to-buffer buf)
+    (unless (buffer-modified-p buf)
+        (ruby-mode)
+        (apply 'insert boilerplate)
+        (goto-line 3)
+    )
+  )
+)
+(global-set-key (kbd "<f6>") 'ruby-buffer)
+
 ;; ===== Web Mode ====
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
