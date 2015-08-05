@@ -95,6 +95,27 @@
 ;; ===== Magit =========
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+(defun endless/visit-pull-request-url ()
+  "Visit the current branch's PR on Github."
+  (interactive)
+  (let* ((remote-url (magit-get "remote"
+                       (magit-get-current-remote)
+                       "url"))
+         (github-url (if (string-prefix-p "github:" remote-url)
+                       "github.groupondev.com"
+                       "github.com"))
+         (project-path (replace-regexp-in-string
+                         "github:\\(.+\\)\\.git\\'" "\\1"
+                         remote-url))
+         (branch (magit-get-current-branch))
+         (pr-url (format "https://%s/%s/compare/%s"
+                           github-url
+                           project-path
+                           branch)))
+    (browse-url pr-url)))
+(eval-after-load 'magit
+  '(define-key magit-mode-map "V"
+    #'endless/visit-pull-request-url))
 
 ;; ===== JavaScript ====
 ;; https://github.com/mooz/js2-mode
