@@ -111,7 +111,7 @@
   "Visit the current branch's PR on Github."
   (interactive "P")
   (let* ((remote-url (magit-get "remote"
-                       (magit-get-current-remote)
+                       (magit-get-remote)
                        "url"))
          (github-url (if (string-prefix-p "github:" remote-url)
                        "github.groupondev.com"
