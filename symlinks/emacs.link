@@ -97,6 +97,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (eval-after-load 'web-mode
   '(progn
      (define-key web-mode-map (kbd "C-c C-n")   'web-mode-tag-match)
