@@ -121,9 +121,9 @@
                          ".*github\\(?:\\.com\\)?:\\(.+?\\)\\(?:\\.git\\)?$"
                          "\\1"
                          remote-url))
-         (branch (magit-get-current-branch))
+         (branch (car (split-string (magit-get-tracked-branch) "^.*?/" t)))
          (base (if arg
-                   (format "%s..." (magit-read-remote-branch "PR against" (magit-get-current-remote)))
+                   (format "%s..." (magit-read-remote-branch "PR against" (magit-get-remote)))
                    ""))
          (pr-url (format "https://%s/%s/compare/%s%s"
                            github-url
