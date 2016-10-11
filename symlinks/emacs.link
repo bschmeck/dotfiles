@@ -1,4 +1,17 @@
 ;; Bring in Emacs' common lisp, we need it for the loop macros that rails-mode uses
+
+;; Install these packages:
+;; * magit
+;; * ruby-end
+;; * inf-ruby
+;; * web-mode
+;; * emacs-rails (from github/bschmeck)
+;; * rcodetools.el (in .emacs.d/lisp)
+;; * js2-mode
+;; * coffee-mode
+;; * python-mode
+;; * solarized (from github/sellout in .emacs.d/themes)
+
 (require 'cl)
 (require 'package)
 
