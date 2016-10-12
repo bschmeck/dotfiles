@@ -5,7 +5,9 @@
 ;; * ruby-end
 ;; * inf-ruby
 ;; * web-mode
-;; * emacs-rails (from github/bschmeck)
+;; * projectile
+;; * projectile-rails
+;; * rspec-mode
 ;; * rcodetools.el (in .emacs.d/lisp)
 ;; * rspec-mode
 ;; * js2-mode
@@ -19,6 +21,8 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+
+(require 'projectile)
 
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -53,9 +57,10 @@
    (define-key ruby-mode-map (kbd "<f5>") 'xmp)
    (electric-pair-mode)
    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+   (projectile-mode)
  )
 )
-(require 'rails)
+
 ;;(require 'rhtml-mode)
 (require 'ruby-end)
 (setq ruby-end-insert-newline nil)
@@ -63,24 +68,14 @@
 (setq rspec-use-rake-when-possible nil)
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
-;; Customizations for aisle50 src
-(eval-after-load 'rails
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(require 'projectile-rails)
+(eval-after-load 'projectile
   '(progn
-	 (rails-find:gen "stylesheets" "app/assets/stylesheets")
-	 (rails-find:gen "javascripts" "app/assets/javascripts")
-	 (rails-find:gen "admin" "app/admin")
-	 (define-key rails-minor-mode-map (kbd "C-c C-c f a") 'rails-find:admin)
-	 (rails-find:gen "interactors" "interactors")
-	 (define-key rails-minor-mode-map (kbd "C-c C-c f i") 'rails-find:interactors)
-	 (rails-find:gen "mailers" "app/mailers")
-	 (define-key rails-minor-mode-map (kbd "C-c C-c f n") 'rails-find:mailers)
-	 (rails-find:gen "spec-integrations" "spec/integrations")
-	 (define-key rails-minor-mode-map (kbd "C-c , , f r i") 'rails-find:spec-integrations)
-	 (rails-find:gen "factories" "factories")
-	 (define-key rails-minor-mode-map (kbd "C-c C-c f r f") 'rails-find:spec-factories)
-     (rails-find:gen "spec-lib" "spec/lib")
-     (define-key rails-minor-mode-map (kbd "C-c C-c f r b") 'rails-find:spec-lib)
-     (define-key rails-minor-mode-map (kbd "C-c C-s") nil)))
+     (add-hook 'projectile-mode-hook 'projectile-rails-on)
+	 (add-hook 'projectile-mode-hook (lambda () (message "projectile mode hook")))))
+(require 'rspec-mode)
 
 (defun ruby-buffer ()
   "Switch to a ruby buffer."
@@ -264,6 +259,9 @@
  '(js2-basic-offset 4)
  '(magit-diff-arguments (quote ("--ignore-space-change" "--no-ext-diff" "-U1")))
  '(magit-status-show-tags nil)
+ '(package-selected-packages
+   (quote
+    (rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
  '(rails-rake-use-bundler-when-possible nil)
  '(vc-follow-symlinks t))
 
