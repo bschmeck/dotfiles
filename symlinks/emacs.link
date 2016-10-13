@@ -68,7 +68,6 @@
 (setq rspec-use-rake-when-possible nil)
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
-(projectile-global-mode)
 (setq projectile-enable-caching t)
 (require 'projectile-rails)
 (eval-after-load 'projectile
