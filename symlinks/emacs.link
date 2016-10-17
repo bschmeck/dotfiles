@@ -61,6 +61,7 @@
 (setq ruby-end-insert-newline nil)
 (require 'rspec-mode)
 (setq rspec-use-rake-when-possible nil)
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 ;; Customizations for aisle50 src
 (eval-after-load 'rails
