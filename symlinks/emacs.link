@@ -7,6 +7,7 @@
 ;; * web-mode
 ;; * emacs-rails (from github/bschmeck)
 ;; * rcodetools.el (in .emacs.d/lisp)
+;; * rspec-mode
 ;; * js2-mode
 ;; * coffee-mode
 ;; * python-mode
@@ -56,6 +57,7 @@
 ;;(require 'rhtml-mode)
 (require 'ruby-end)
 (setq ruby-end-insert-newline nil)
+(require 'rspec-mode)
 
 ;; Customizations for aisle50 src
 (eval-after-load 'rails
