@@ -60,6 +60,7 @@
 (require 'ruby-end)
 (setq ruby-end-insert-newline nil)
 (require 'rspec-mode)
+(setq rspec-use-rake-when-possible nil)
 
 ;; Customizations for aisle50 src
 (eval-after-load 'rails
