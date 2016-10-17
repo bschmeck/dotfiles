@@ -57,7 +57,6 @@
    (define-key ruby-mode-map (kbd "<f5>") 'xmp)
    (electric-pair-mode)
    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-   (projectile-mode)
  )
 )
 
@@ -70,10 +69,8 @@
 
 (setq projectile-enable-caching t)
 (require 'projectile-rails)
-(eval-after-load 'projectile
-  '(progn
-     (add-hook 'projectile-mode-hook 'projectile-rails-on)
-	 (add-hook 'projectile-mode-hook (lambda () (message "projectile mode hook")))))
+(add-hook 'find-file-hooks 'projectile-rails-on)
+
 (require 'rspec-mode)
 
 (defun ruby-buffer ()
@@ -94,6 +91,7 @@
   )
 )
 (global-set-key (kbd "<f6>") 'ruby-buffer)
+(projectile-mode)
 
 ;; ===== Elixir ======
 (add-hook 'elixir-mode-hook
