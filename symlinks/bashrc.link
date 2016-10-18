@@ -33,6 +33,7 @@ if [ "$(uname -s)" == "Darwin" ] && [ -f $(brew --prefix)/etc/bash_completion ];
   . $(brew --prefix)/etc/bash_completion
 fi
 
+PROMPT_COLOR=36m
 # Do any customizations specific to this machine (or things you don't want in source control.)
 if [ -f $HOME/.localrc ]
 then
@@ -46,7 +47,7 @@ do
     source $file
 done
 
-export PS1="\[\033]0;\$TERMTITLE\007\]\[\033[00;31m\]\n\u@\h\[\033[00m\]\n\[\033[00;36m\]\$(__git_ps1 \"[%s] \")\w\[\033[00m\] > "
+export PS1="\[\033]0;\$TERMTITLE\007\]\[\033[00;31m\]\n\u@\h\[\033[00m\]\n\[\033[00;$PROMPT_COLOR\]\$(__git_ps1 \"[%s] \")\w\[\033[00m\] > "
 
 
 ### Added by the Heroku Toolbelt
