@@ -53,3 +53,6 @@ export PS1="\[\033]0;\$TERMTITLE\007\]\[\033[00;$HOST_COLOR\]\n\u@\h\[\033[00m\]
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export NVM_DIR="/home/bschmeck/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
