@@ -121,6 +121,7 @@
   '(progn
      (define-key web-mode-map (kbd "C-c C-n")   'web-mode-tag-match)
      (define-key web-mode-map (kbd "C-c C-p")   'web-mode-element-parent)
+     (setq web-mode-markup-indent-offset 2)
      (setq web-mode-code-indent-offset 2)))
 
 ;; ===== Magit =========
