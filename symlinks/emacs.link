@@ -29,6 +29,9 @@
 
 (tool-bar-mode -1)
 
+(require 'whitespace)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (let ((default-directory "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
@@ -52,11 +55,16 @@
 (setq ruby-insert-encoding-magic-comment nil)
 (autoload 'run-ruby "inf-ruby")
 (require 'rcodetools)
+(setq line-length-projects '("importer" "beehive"))
 (add-hook 'ruby-mode-hook
  (lambda ()
    (define-key ruby-mode-map (kbd "<f5>") 'xmp)
    (electric-pair-mode)
    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+   (message "in a ruby buffer")
+   (message (projectile-project-name))
+   (if (member (projectile-project-name) line-length-projects)
+       (whitespace-mode))
  )
 )
 
