@@ -2,8 +2,10 @@
 	name = Ben Schmeckpeper
 	email = ben.schmeckpeper@gmail.com
 [core]
-	editor = emacs 
+	editor = emacs
 	excludesfile = ~/.gitignore_global
+[include]
+    path = .git.local
 [alias]
 	co = checkout
     ci = commit
