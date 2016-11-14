@@ -1,6 +1,9 @@
 # Emacs autosave
 *~
 
+# Projectile config
+.projectile
+
 # Compiled Objects
 *.o
 *.pyc
