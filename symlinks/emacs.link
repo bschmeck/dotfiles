@@ -1,19 +1,21 @@
 ;; Bring in Emacs' common lisp, we need it for the loop macros that rails-mode uses
 
-;; Install these packages:
+;; Install these packages from ELPA:
 ;; * magit
 ;; * ruby-end
 ;; * inf-ruby
 ;; * web-mode
 ;; * projectile
 ;; * projectile-rails
-;; * rspec-mode
-;; * rcodetools.el (in .emacs.d/lisp)
-;; * rspec-mode
+;; * yasnippet
 ;; * js2-mode
 ;; * coffee-mode
 ;; * python-mode
+;;
+;; From Github:
 ;; * solarized (from github/sellout in .emacs.d/themes)
+;; * rcodetools.el (in .emacs.d/lisp)
+;; * rspec-mode (from github/bschmeck in .emacs.d/lisp)
 
 (require 'cl)
 (require 'package)
