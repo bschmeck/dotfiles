@@ -64,8 +64,6 @@
    (define-key ruby-mode-map (kbd "<f5>") 'xmp)
    (electric-pair-mode)
    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-   (message "in a ruby buffer")
-   (message (projectile-project-name))
    (if (member (projectile-project-name) line-length-projects)
        (whitespace-mode))
  )
