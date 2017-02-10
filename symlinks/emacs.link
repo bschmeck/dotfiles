@@ -11,6 +11,8 @@
 ;; * js2-mode
 ;; * coffee-mode
 ;; * python-mode
+;; * elixir-mode
+;; * evil
 ;;
 ;; From Github:
 ;; * solarized (from github/sellout in .emacs.d/themes)
@@ -34,6 +36,9 @@
 
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
+(setq whitespace-line-column 100)
+
+(require 'evil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (let ((default-directory "~/.emacs.d/"))
@@ -269,7 +274,7 @@
  '(magit-status-show-tags nil)
  '(package-selected-packages
    (quote
-    (elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
+    (evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
  '(rails-rake-use-bundler-when-possible nil)
  '(vc-follow-symlinks t))
 
@@ -290,6 +295,13 @@
 (defun un-maxpage ()
   (interactive)
   (load-theme 'solarized-light t))
+
+(defun loser ()
+  (interactive)
+  (evil-mode 1))
+(defun god ()
+  (interactive)
+  (evil-mode 0))
 
 (display-time)
 (put 'upcase-region 'disabled nil)
