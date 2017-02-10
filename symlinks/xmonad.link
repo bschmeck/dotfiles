@@ -1,5 +1,6 @@
 -- default desktop configuration for Fedora
 
+import System.IO (hPutStrLn)
 import System.Posix.Env (getEnv)
 import Data.Maybe (maybe)
 
@@ -12,18 +13,37 @@ import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.Run(spawnPipe)
 
-myLogHook h = dynamicLogWithPP dzenPP
+-- From http://blog.wheerd.de/2012/06/14/xmonad-with-dzen-and-conky/
+myDzenStatus = "dzen2 -x '0' -w '1000' -ta '1'" ++ myDzenStyle
+myDzenConky = "conky -c ~/.conkyrc | dzen2 -x '1000' -ta 'r'" ++ myDzenStyle
+myDzenStyle = " -h '24' -y '0' -fg '#777777' -bg '#222222'"
+-- Very plain formatting, non-empty workspaces are highlighted,
+-- urgent workspaces (e.g. active IM window) are highlighted in red
+myDzenPP  = dzenPP
+    { ppCurrent = dzenColor "#3399ff" "" . wrap " " " "
+    , ppHidden  = dzenColor "#dddddd" "" . wrap " " " "
+    , ppHiddenNoWindows = dzenColor "#777777" "" . wrap " " " "
+    , ppUrgent  = dzenColor "#ff0000" "" . wrap " " " "
+    , ppSep     = "  "
+    , ppLayout  = \y -> ""
+    , ppTitle   = dzenColor "#ffffff" "" . wrap " " " "
+    }
+
+myLogHook h = dynamicLogWithPP $ myDzenPP { ppOutput = hPutStrLn h }
 myModMask = mod4Mask
 myTerminal = "terminator"
 
 main = do
+     status <- spawnPipe myDzenStatus
+     conky <- spawnPipe myDzenConky
      session <- getEnv "DESKTOP_SESSION"
      -- http://stackoverflow.com/questions/15120981/modifying-xmonad-configuration-on-fedora-like-distro
      let config = maybe desktopConfig desktop session
      xmonad $ config
        {
-         logHook = myLogHook,
+         logHook = myLogHook status,
          modMask = myModMask,
          terminal = myTerminal
        } `additionalKeys`

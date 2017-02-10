@@ -1,0 +1,11 @@
+background yes
+out_to_x no
+out_to_console yes
+update_interval 3
+total_run_times 0
+use_spacer none
+
+TEXT
+^fg(\#666666)${cpu cpu1}%^fg() \
+^fg(\#888888)${mem}^fg() \
+^fg(\#aaaaaa)${time %b %d %I:%M}^fg()
