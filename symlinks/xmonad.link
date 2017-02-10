@@ -1,5 +1,9 @@
 -- default desktop configuration for Fedora
 
+import qualified XMonad.StackSet as W
+import Data.Char (toLower)
+import Data.List (intercalate)
+
 import System.IO (hPutStrLn)
 import System.Posix.Env (getEnv)
 import Data.Maybe (maybe)
@@ -12,7 +16,9 @@ import XMonad.Config.Kde
 import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.NamedWindows(getName)
 import XMonad.Util.Run(spawnPipe)
 
 -- From http://blog.wheerd.de/2012/06/14/xmonad-with-dzen-and-conky/
@@ -35,13 +41,35 @@ myLogHook h = dynamicLogWithPP $ myDzenPP { ppOutput = hPutStrLn h }
 myModMask = mod4Mask
 myTerminal = "terminator"
 
+-- From https://github.com/doitian/xmonad-starter-kit/blob/master/xmonad.hs
+
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name <- getName w
+        ws <- gets windowset
+        c <- withDisplay $ \d -> fmap resClass $ io $ getClassHint d w
+        whenJust (W.findTag w ws) (flash name c)
+      where flash _ "Pidgin" _ = spawn "true"
+            flash _ "emesene" _ = spawn "true"
+            flash name c index = spawn $
+                                 intercalate " " $
+                                 [ "notify-send -i"
+                                 , icon
+                                 , show $ show name
+                                 , show $ "on " ++ index ]
+                where icon = case c of
+                               "URxvt" -> "gnome-terminal"
+                               otherwise -> map toLower c
+
 main = do
      status <- spawnPipe myDzenStatus
      conky <- spawnPipe myDzenConky
      session <- getEnv "DESKTOP_SESSION"
      -- http://stackoverflow.com/questions/15120981/modifying-xmonad-configuration-on-fedora-like-distro
      let config = maybe desktopConfig desktop session
-     xmonad $ config
+     xmonad $ withUrgencyHookC LibNotifyUrgencyHook urgencyConfig { suppressWhen = Focused } $ config
        {
          logHook = myLogHook status,
          modMask = myModMask,
