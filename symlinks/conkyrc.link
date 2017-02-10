@@ -6,6 +6,7 @@ total_run_times 0
 use_spacer none
 
 TEXT
+^fg(\#ffffff)${execi 60 /home/bschmeck/src/divvy_check/conky.rb} \
 ^fg(\#666666)${cpu cpu1}%^fg() \
 ^fg(\#888888)${mem}^fg() \
 ^fg(\#aaaaaa)${time %b %d %I:%M}^fg()
