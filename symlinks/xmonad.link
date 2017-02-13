@@ -10,6 +10,7 @@ import Data.Maybe (maybe)
 
 import Graphics.X11.ExtraTypes.XF86
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Config.Gnome
 import XMonad.Config.Kde
@@ -80,7 +81,9 @@ main = do
          ((mod4Mask, xK_Print), spawn "gnome-screenshot -a"),
          ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 10%-"),
          ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 10%+"),
-         ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
+         ((0, xF86XK_AudioMute), spawn "amixer set Master toggle"),
+         ((mod4Mask, xK_f), swapNextScreen),
+         ((mod4Mask, xK_minus), toggleWS)
        ]
 
 desktop "gnome" = gnomeConfig
