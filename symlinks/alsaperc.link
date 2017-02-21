@@ -14,15 +14,15 @@ ICON=""
 
 
 if [[ $ASTAT = "on" ]]; then
-    ICON="spkr_01.xbm"
+    ICON="spkr_on.xbm"
     PERCBAR=`echo -e "$AMASTER"\
         | dzen2-gdbar -bg "#393939" -fg "#d6d6d6" -h 1 -w 60`
 else
-    ICON="spkr_02.xbm"
+    ICON="spkr_mute.xbm"
     PERCBAR=`echo 0\
         | dzen2-gdbar -bg "#393939" -fg "#d6d6d6" -h 1 -w 60`
 fi
 
 
-ICON='^i(/home/bschmeck/.xmonad/xbm8x8/'"$ICON)"
+ICON='^i(/home/bschmeck/.xmonad/xbm16x16/'"$ICON)"
 echo "$ICON $PERCBAR"
