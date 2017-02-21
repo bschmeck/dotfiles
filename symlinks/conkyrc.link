@@ -7,6 +7,8 @@ use_spacer none
 
 TEXT
 ^fg(\#ffffff)${execi 10 /home/bschmeck/src/elixir/divvy/s_check} \
+^fg(\#888888)${wireless_essid} \
+^fg(\#888888)${if_up tun0}(vpn)$endif \
 ^fg(\#666666)bat: ${battery_percent}% \
 ^fg(\#666666)cpu: ${cpu cpu1}%^fg() \
 ^fg(\#666666)mem: ${mem}^fg() \
