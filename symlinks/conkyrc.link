@@ -1,11 +1,13 @@
-background no
-out_to_x no
-out_to_console yes
-update_interval 3
-total_run_times 0
-use_spacer none
+conky.config = {
+  background = false,
+  out_to_x = false,
+  out_to_console = true,
+  update_interval = 3,
+  total_run_times = 0,
+  use_spacer = none
+};
 
-TEXT
+conky.text = [[
 ^fg(\#d6d6d6)^ca(1, amixer set Master toggle)${exec ~/.xmonad/scripts/alsaperc}^ca() \
 ^fg(\#ffffff)${execi 10 /home/bschmeck/src/elixir/divvy/s_check} \
 ^fg(\#888888)${wireless_essid} \
@@ -14,3 +16,4 @@ TEXT
 ^fg(\#666666)cpu: ${cpu cpu1}%^fg() \
 ^fg(\#666666)mem: ${mem}^fg() \
 ^fg(\#aaaaaa)${time %b %d %I:%M}^fg()
+]]
