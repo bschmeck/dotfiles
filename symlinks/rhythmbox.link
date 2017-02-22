@@ -1,0 +1,13 @@
+#!/bin/bash
+
+STATUS=`gdbus call --session --dest org.mpris.MediaPlayer2.rhythmbox --object-path /org/mpris/MediaPlayer2 --method org.freedesktop.DBus.Properties.Get org.mpris.MediaPlayer2.Player PlaybackStatus`
+ICON=""
+
+
+if [[ $STATUS = "(<'Playing'>,)" ]]; then
+    ICON="pause.xbm"
+else
+    ICON="play.xbm"
+fi
+
+echo "^i(/home/bschmeck/.xmonad/xbm16x16/$ICON)"
