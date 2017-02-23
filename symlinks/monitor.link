@@ -23,6 +23,42 @@ class XRandR
               end
     `xrandr --output #{name} #{loc_str} #{BUILT_IN_DISPLAY}`
   end
+
+  def self.status_of(name)
+    statuses.detect{|status| status.name == name }
+  end
+
+  def self.statuses
+    return to_enum(__method__) unless block_given?
+
+    status = nil
+    `xrandr`.each_line do |line|
+      next if line.start_with? "Screen"
+
+      if line.start_with? " "
+        status.modes << line
+      else
+        yield status if status
+        status = XRandRStatus.new(line)
+      end
+    end
+  end
+end
+
+class XRandRStatus
+  attr_reader :modes, :name, :properties
+  def initialize(properties_line)
+    @name, @connected, @properties = properties_line.split(" ", 3)
+    @modes = []
+  end
+
+  def connected?
+    @connected == "connected"
+  end
+
+  def active_mode
+    modes.detect{|m| m =~ /\*/ }
+  end
 end
 
 class Monitor
@@ -41,6 +77,12 @@ class Monitor
 
   def off
     XRandR.off(name)
+  end
+
+  def on?
+    status = XRandR.status_of(name)
+
+    status.connected? && !!status.active_mode
   end
 end
 
