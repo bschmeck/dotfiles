@@ -1,15 +1,40 @@
 #! /usr/bin/env ruby
 
+class XRandR
+  BUILT_IN_DISPLAY = "eDP-1".freeze
+
+  def self.on(name, mode)
+    `xrandr --output #{name} --mode #{mode}`
+  end
+
+  def self.off(name)
+    `xrandr --output #{name} --off`
+  end
+
+  def self.position(name, location)
+    loc_str = if location == :left
+                "--left-of"
+              elsif location == :mirror
+                "--same-as"
+              elsif location == :right
+                "--right-of"
+              else
+                raise ArgumentError, "Unsupported location #{location}"
+              end
+    `xrandr --output #{name} #{loc_str} #{BUILT_IN_DISPLAY}`
+  end
+end
+
 if ARGV[0] == "home"
-  `xrandr --output HDMI-2 --mode 1920x1080`
-  `xrandr --output HDMI-2 --left-of eDP-1`
+  XRandR.on("HDMI-2", "1920x1080")
+  XRandR.position("HDMI-2", :left)
 elsif ARGV[0] == "mirror"
-  `xrandr --output DP-1 --same-as eDP-1`
+  XRandR.position("DP-1", :mirror)
 elsif ARGV[0] == "single"
-  `xrandr --output DP-1 --off`
-  `xrandr --output HDMI-2 --off`
-  `xrandr --output eDP-1 --mode 1920x1080_60.00`
+  XRandR.off("DP-1")
+  XRandR.off("HDMI-2")
+  XRandR.on("eDP-1", "1920x1080_60.00")
 elsif ARGV[0] == "work"
-  `xrandr --output DP-1 --mode 2560x1440`
-  `xrandr --output DP-1 --right-of eDP-1`
+  XRandR.on("DP-1", "2560x1440")
+  XRandR.position("DP-1", :right)
 end
