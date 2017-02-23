@@ -25,16 +25,37 @@ class XRandR
   end
 end
 
+class Monitor
+  attr_reader :default_location, :mode, :name
+
+  def initialize(name, mode, default_location = nil)
+    @mode = mode
+    @name = name
+    @default_location = default_location
+  end
+
+  def on
+    XRandR.on(name, mode)
+    XRandR.position(name, default_location) if default_location
+  end
+
+  def off
+    XRandR.off(name)
+  end
+end
+
+HOME = Monitor.new("HDMI-2", "1920x1080", :left)
+LAPTOP = Monitor.new("eDP-1", "1920x1080_60.00")
+WORK = Monitor.new("DP-1", "2560x1440", :right)
+
 if ARGV[0] == "home"
-  XRandR.on("HDMI-2", "1920x1080")
-  XRandR.position("HDMI-2", :left)
+  HOME.on
 elsif ARGV[0] == "mirror"
-  XRandR.position("DP-1", :mirror)
+  XRandR.position(WORK.name, :mirror)
 elsif ARGV[0] == "single"
-  XRandR.off("DP-1")
-  XRandR.off("HDMI-2")
-  XRandR.on("eDP-1", "1920x1080_60.00")
+  WORK.off
+  HOME.off
+  LAPTOP.on
 elsif ARGV[0] == "work"
-  XRandR.on("DP-1", "2560x1440")
-  XRandR.position("DP-1", :right)
+  WORK.on
 end
