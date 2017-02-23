@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+if ARGV[0] == "home"
+  `xrandr --output HDMI-2 --mode 1920x1080`
+  `xrandr --output HDMI-2 --left-of eDP-1`
+elsif ARGV[0] == "mirror"
+  `xrandr --output DP-1 --same-as eDP-1`
+elsif ARGV[0] == "single"
+  `xrandr --output DP-1 --off`
+  `xrandr --output HDMI-2 --off`
+  `xrandr --output eDP-1 --mode 1920x1080_60.00`
+elsif ARGV[0] == "work"
+  `xrandr --output DP-1 --mode 2560x1440`
+  `xrandr --output DP-1 --right-of eDP-1`
+end

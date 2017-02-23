@@ -1,0 +1,7 @@
+#! /usr/bin/env ruby
+
+if ARGV[0] == "up"
+  `nmcli con up id Kenna`
+elsif ARGV[0] == "down"
+  `nmcli con down id Kenna`
+end
