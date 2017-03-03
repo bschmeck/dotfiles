@@ -80,13 +80,23 @@ class Monitor
   end
 
   def on?
-    status = XRandR.status_of(name)
+    !!status.active_mode
+  end
 
-    status.connected? && !!status.active_mode
+  def off?
+    !on?
   end
 
   def toggle
-    on? ? off : on
+    if status.connected? && off?
+      on
+    else
+      off
+    end
+  end
+
+  def status
+    XRandR.status_of(name)
   end
 end
 
