@@ -4,6 +4,9 @@
 # Projectile config
 .projectile
 
+# direnv file
+.envrc
+
 # Compiled Objects
 *.o
 *.pyc
