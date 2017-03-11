@@ -42,6 +42,7 @@ class XRandR
         status = XRandRStatus.new(line)
       end
     end
+    yield status if status
   end
 end
 
