@@ -115,6 +115,7 @@ elsif ARGV[0] == "single"
   LAPTOP.on
 elsif ARGV[0] == "toggle"
   WORK.toggle
+  HOME.toggle
 elsif ARGV[0] == "work"
   WORK.on
 end
