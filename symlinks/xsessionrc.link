@@ -1,5 +1,9 @@
+#! /bin/bash
+
 /usr/libexec/notification-daemon &
 
 slack &
 
 dropbox start &
+
+elixir --detached --sname divvy --no-halt -S mix run
