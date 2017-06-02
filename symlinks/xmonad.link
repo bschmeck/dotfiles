@@ -87,7 +87,7 @@ main = do
          ((0, 0x1008FFB2), spawn "amixer set Capture toggle"),
          ((mod4Mask, xK_f), swapNextScreen),
          ((mod4Mask, xK_minus), toggleWS),
-         ((mod4Mask .|. shiftMask, xK_o), spawn "monitor toggle")
+         ((mod4Mask .|. shiftMask, xK_o), spawn "monitor toggle && xmonad --recompile; xmonad --restart")
        ]
 
 desktop "gnome" = gnomeConfig
