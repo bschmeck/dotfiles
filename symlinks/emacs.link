@@ -409,7 +409,7 @@
  '(magit-status-show-tags nil)
  '(package-selected-packages
    (quote
-    (evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
+    (bundler evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
  '(rails-rake-use-bundler-when-possible nil)
  '(vc-follow-symlinks t))
 
