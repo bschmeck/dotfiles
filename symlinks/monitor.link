@@ -3,8 +3,8 @@
 class XRandR
   BUILT_IN_DISPLAY = "eDP-1".freeze
 
-  def self.on(name, mode)
-    `xrandr --output #{name} --mode #{mode}`
+  def self.on(name, mode, primary: false)
+    `xrandr --output #{name} --mode #{mode} #{"--primary" if primary}`
   end
 
   def self.off(name)
@@ -63,17 +63,18 @@ class XRandRStatus
 end
 
 class Monitor
-  attr_reader :default_location, :mode, :name
+  attr_reader :location, :mode, :name, :primary
 
-  def initialize(name, mode, default_location = nil)
+  def initialize(name, mode, location: nil, primary: false)
     @mode = mode
     @name = name
-    @default_location = default_location
+    @location = location
+    @primary = primary
   end
 
   def on
-    XRandR.on(name, mode)
-    XRandR.position(name, default_location) if default_location
+    XRandR.on(name, mode, primary: primary)
+    XRandR.position(name, location) if location
   end
 
   def off
@@ -101,9 +102,9 @@ class Monitor
   end
 end
 
-HOME = Monitor.new("HDMI-2", "1920x1080", :left)
+HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true)
 LAPTOP = Monitor.new("eDP-1", "1920x1080_60.00")
-WORK = Monitor.new("DP-1", "2560x1440", :left)
+WORK = Monitor.new("DP-1", "2560x1440", location: :left, primary: true)
 
 if ARGV[0] == "home"
   HOME.on
