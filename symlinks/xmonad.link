@@ -25,7 +25,7 @@ import XMonad.Util.Run(spawnPipe)
 -- From http://blog.wheerd.de/2012/06/14/xmonad-with-dzen-and-conky/
 myDzenStatus = "dzen2 -x '0' -w '1000' -ta '1'" ++ myDzenStyle
 myDzenConky = "killall conky; conky -c ~/.conkyrc | dzen2 -x '1000' -ta 'r'" ++ myDzenStyle
-myDzenStyle = " -h '24' -y '0' -fg '#777777' -bg '#222222'"
+myDzenStyle = " -h '24' -y '0' -fg '#777777' -bg '#222222' -dock"
 -- Very plain formatting, non-empty workspaces are highlighted,
 -- urgent workspaces (e.g. active IM window) are highlighted in red
 myDzenPP  = dzenPP
