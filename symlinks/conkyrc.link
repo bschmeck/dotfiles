@@ -10,7 +10,6 @@ conky.config = {
 conky.text = [[
 ^fg(\#d6d6d6)^ca(1, rhythmbox-client --play-pause)${exec ~/.xmonad/scripts/rhythmbox}^ca() \
 ^fg(\#d6d6d6)^ca(1, amixer set Master toggle)${exec ~/.xmonad/scripts/alsaperc}^ca() \
-^fg(\#ffffff)${execi 10 /home/bschmeck/src/elixir/divvy/s_check} \
 ^fg(\#888888)${wireless_essid} \
 ^fg(\#888888)${if_up tun0}(vpn)$endif \
 ^fg(\#666666)bat: [${battery_percent BAT0}% | ${battery_percent BAT1}%] \
