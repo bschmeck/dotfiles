@@ -8,6 +8,7 @@ conky.config = {
 };
 
 conky.text = [[
+^fg(\#d6d6d6)${exec rhythmbox-client --print-playing} \
 ^fg(\#d6d6d6)^ca(1, rhythmbox-client --play-pause)${exec ~/.xmonad/scripts/rhythmbox}^ca() \
 ^fg(\#d6d6d6)^ca(1, amixer set Master toggle)${exec ~/.xmonad/scripts/alsaperc}^ca() \
 ^fg(\#888888)${wireless_essid} \
