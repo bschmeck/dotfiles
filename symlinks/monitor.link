@@ -103,8 +103,8 @@ class Monitor
 end
 
 HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true)
-LAPTOP = Monitor.new("eDP-1", "1920x1080_60.00")
-WORK = Monitor.new("DP-1", "2560x1440", location: :left, primary: true)
+LAPTOP = Monitor.new("eDP-1", "1920x1080_60.00", primary: true)
+WORK = Monitor.new("DP-1", "2560x1440", location: :right, primary: false)
 
 if ARGV[0] == "home"
   HOME.on
