@@ -113,7 +113,8 @@
   )
 )
 (global-set-key (kbd "<f6>") 'ruby-buffer)
-(projectile-mode)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; ===== Elixir ======
 (require 'alchemist)
