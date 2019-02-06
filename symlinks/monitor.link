@@ -3,8 +3,13 @@
 class XRandR
   BUILT_IN_DISPLAY = "eDP-1".freeze
 
-  def self.on(name, mode, primary: false)
-    `xrandr --output #{name} --mode #{mode} #{"--primary" if primary}`
+  def self.on(name, mode, primary: false, crtc_number: nil)
+    command = ["xrandr", "--output #{name}", "--mode #{mode}"]
+    command << "--primary" if primary
+    command << "--crtc #{crtc_number}" if crtc_number
+    command = command.join " "
+
+    `#{command}`
   end
 
   def self.off(name)
@@ -63,17 +68,18 @@ class XRandRStatus
 end
 
 class Monitor
-  attr_reader :location, :mode, :name, :primary
+  attr_reader :crtc_number, :location, :mode, :name, :primary
 
-  def initialize(name, mode, location: nil, primary: false)
+  def initialize(name, mode, location: nil, primary: false, crtc_number: nil)
     @mode = mode
     @name = name
     @location = location
     @primary = primary
+    @crtc_number = crtc_number
   end
 
   def on
-    XRandR.on(name, mode, primary: primary)
+    XRandR.on(name, mode, primary: primary, crtc_number: crtc_number)
     XRandR.position(name, location) if location
   end
 
@@ -102,7 +108,7 @@ class Monitor
   end
 end
 
-HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true)
+HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true, crtc_number: 2)
 LAPTOP = Monitor.new("eDP-1", "1920x1080_60.00", primary: true)
 WORK = Monitor.new("DP-1", "2560x1440", location: :right, primary: false)
 
