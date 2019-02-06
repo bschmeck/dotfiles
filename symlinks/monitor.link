@@ -125,4 +125,7 @@ elsif ARGV[0] == "toggle"
   HOME.toggle
 elsif ARGV[0] == "work"
   WORK.on
+elsif ARGV[0] == "hdmi"
+  HOME.on
+  LAPTOP.off
 end
