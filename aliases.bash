@@ -14,7 +14,7 @@ alias hgcleanup='hg status -un `hg root` | xargs rm -f'
 
 alias edwin='scheme -edwin -edit'
 
-alias log='cd ~/src/log; emacs postkid12.xml &'
+alias log='cd ~/src/log; emacs postkid16.xml &'
 
 alias appserver='python /home/bschmeck/appengine/dev_appserver.py'
 
