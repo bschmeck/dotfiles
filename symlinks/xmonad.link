@@ -78,7 +78,7 @@ main = do
          terminal = myTerminal
        } `additionalKeys`
        [
-         ((mod4Mask .|. shiftMask, xK_z), spawn "slock"),
+         ((mod4Mask .|. shiftMask, xK_z), spawn "xrandr >> /dev/null && slock"),
          ((mod4Mask, xK_Print), spawn "flameshot gui -p /tmp/screenshots/"),
          ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-"),
          ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+"),
