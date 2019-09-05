@@ -12,3 +12,6 @@
 *.pyc
 
 TAGS
+
+# ag ignore file
+.ignore
