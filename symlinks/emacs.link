@@ -420,7 +420,7 @@
  '(magit-status-show-tags nil)
  '(package-selected-packages
    (quote
-    (direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
+    (yaml-mode git-timemachine git-link flymake-go go-mode ag ## direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
  '(rails-rake-use-bundler-when-possible nil)
  '(vc-follow-symlinks t))
 
