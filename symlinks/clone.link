@@ -1,0 +1,36 @@
+#! /usr/bin/env ruby
+
+def get_integer_in_range(range, prompt)
+  print "Which user email? "
+  input = Integer(STDIN.gets.chomp)
+  raise unless range === input
+
+  input
+rescue
+  puts "Invalid value.  Please try again."
+  get_integer_in_range(range, prompt)
+end
+
+def choose(emails)
+  puts "Configured email addresses:"
+  emails.each_with_index do |email, index|
+    puts "[#{index}] #{email}"
+  end
+  choice = get_integer_in_range(0...emails.size, "Which user email?")
+
+  emails[choice]
+end
+
+user, repo = ARGV[0].split "/"
+
+github_uri = "git@github.com:#{user}/#{repo}"
+dir = "~/src/#{repo}"
+
+
+
+user_email = choose(%w(bschmeck@kennasecurity.com ben.schmeckpeper@gmail.com))
+
+puts "Clone #{user}/#{repo} into #{dir} as #{user_email}"
+
+`git clone #{github_uri} #{dir}`
+`cd #{dir} && git config user.email #{user_email}`
