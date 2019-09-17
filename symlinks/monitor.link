@@ -109,8 +109,8 @@ class Monitor
 end
 
 HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true, crtc_number: 2)
-LAPTOP = Monitor.new("eDP-1", "1920x1080_60.00", primary: true)
-WORK = Monitor.new("DP-1", "2560x1440", location: :right, primary: false)
+LAPTOP = Monitor.new("eDP-1", "1920x1080", primary: true)
+WORK = Monitor.new("HDMI-2", "2560x1440", location: :right, primary: false)
 
 if ARGV[0] == "home"
   HOME.on
@@ -122,7 +122,7 @@ elsif ARGV[0] == "single"
   LAPTOP.on
 elsif ARGV[0] == "toggle"
   WORK.toggle
-  HOME.toggle
+  #HOME.toggle
 elsif ARGV[0] == "work"
   WORK.on
 elsif ARGV[0] == "hdmi"
