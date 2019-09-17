@@ -75,7 +75,10 @@ main = do
        {
          logHook = myLogHook status,
          modMask = myModMask,
-         terminal = myTerminal
+         terminal = myTerminal,
+         startupHook = do
+           startupHook config
+           spawn "~/.xmonad/scripts/.initrc"
        } `additionalKeys`
        [
          ((mod4Mask .|. shiftMask, xK_z), spawn "xrandr >> /dev/null && slock"),
