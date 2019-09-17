@@ -1,9 +1,9 @@
 #! /usr/bin/env ruby
 
 if ARGV[0] == "up"
-  `nmcli con up Kenna`
-  `nmcli con up KennaInternal`
+  `nmcli con up 'Kenna US'`
+  `nmcli con up 'Kenna Internal'`
 elsif ARGV[0] == "down"
-  `nmcli con down Kenna`
-  `nmcli con down KennaInternal`
+  `nmcli con down 'Kenna US'`
+  `nmcli con down 'Kenna Internal'`
 end
