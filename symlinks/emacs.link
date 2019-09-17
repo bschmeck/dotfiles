@@ -14,6 +14,8 @@
 ;; * elixir-mode
 ;; * evil
 ;; * alchemist
+;; * direnv
+;; * git-link
 ;;
 ;; From Github:
 ;; * solarized (from github/sellout in .emacs.d/themes)
