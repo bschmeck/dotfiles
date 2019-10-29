@@ -29,8 +29,11 @@ class XRandR
     `xrandr --output #{name} #{loc_str} #{BUILT_IN_DISPLAY}`
   end
 
-  def self.status_of(name)
-    statuses.detect{|status| status.name == name }
+  def self.status_of(name, mode)
+    statuses.detect do |status|
+      status.name == name &&
+        status.preferred_mode&.start_with?(mode)
+    end
   end
 
   def self.statuses
@@ -41,7 +44,7 @@ class XRandR
       next if line.start_with? "Screen"
 
       if line.start_with? " "
-        status.modes << line
+        status.modes << line.lstrip
       else
         yield status if status
         status = XRandRStatus.new(line)
@@ -64,6 +67,10 @@ class XRandRStatus
 
   def active_mode
     modes.detect{|m| m =~ /\*/ }
+  end
+
+  def preferred_mode
+    modes.detect{|m| m =~ /\+/ }
   end
 end
 
@@ -96,6 +103,8 @@ class Monitor
   end
 
   def toggle
+    return unless status
+
     if status.connected? && off?
       on
     else
@@ -104,7 +113,7 @@ class Monitor
   end
 
   def status
-    XRandR.status_of(name)
+    XRandR.status_of(name, mode)
   end
 end
 
@@ -122,7 +131,7 @@ elsif ARGV[0] == "single"
   LAPTOP.on
 elsif ARGV[0] == "toggle"
   WORK.toggle
-  #HOME.toggle
+  HOME.toggle
 elsif ARGV[0] == "work"
   WORK.on
 elsif ARGV[0] == "hdmi"
