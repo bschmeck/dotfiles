@@ -1,9 +1,32 @@
 #! /usr/bin/env ruby
 
+CONNECTION_NAMES = {
+  "amex" => "Kenna Amex",
+  "internal" => "Kenna Internal",
+  "nyc3" => "Kenna NYC3",
+  "us" => "Kenna US"
+}
+
+def names_for(conns)
+  conns = %w[us internal] if conns.empty?
+
+  conns.map{|c| CONNECTION_NAMES.fetch(c) }
+end
+
+def activate(*conns)
+  names_for(conns).each do |name|
+    `echo push | nmcli --ask con up '#{name}'`
+  end
+end
+
+def deactivate(*conns)
+  names_for(conns).each do |name|
+    `nmcli con down '#{name}'`
+  end
+end
+
 if ARGV[0] == "up"
-  `nmcli con up 'Kenna US'`
-  `nmcli con up 'Kenna Internal'`
+  activate(*ARGV[1..-1])
 elsif ARGV[0] == "down"
-  `nmcli con down 'Kenna US'`
-  `nmcli con down 'Kenna Internal'`
+  deactivate(*ARGV[1..-1])
 end
