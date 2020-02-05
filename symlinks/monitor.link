@@ -32,7 +32,7 @@ class XRandR
   def self.status_of(name, mode)
     statuses.detect do |status|
       status.name == name &&
-        status.preferred_mode&.start_with?(mode)
+        (status.preferred_mode&.start_with?(mode) || status.modes.first&.start_with?(mode))
     end
   end
 
@@ -119,7 +119,7 @@ end
 
 HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true, crtc_number: 2)
 LAPTOP = Monitor.new("eDP-1", "1920x1080", primary: true)
-WORK = Monitor.new("HDMI-2", "2560x1440", location: :right, primary: false)
+WORK = Monitor.new("HDMI-2", "3440x1440", location: :right, primary: false)
 
 if ARGV[0] == "home"
   HOME.on
