@@ -2,6 +2,8 @@
 
 CONNECTION_NAMES = {
   "amex" => "Kenna Amex",
+  "boa" => "Kenna BoA",
+  "gcp" => "Kenna GCP",
   "internal" => "Kenna Internal",
   "nyc3" => "Kenna NYC3",
   "us" => "Kenna US"
