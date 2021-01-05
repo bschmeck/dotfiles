@@ -452,6 +452,8 @@
   (interactive)
   (evil-mode 0))
 
+(setq initial-major-mode 'ruby-mode)
+
 (display-time)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
