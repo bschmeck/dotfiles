@@ -10,7 +10,7 @@ CONNECTION_NAMES = {
 }
 
 def names_for(conns)
-  conns = %w[us internal] if conns.empty?
+  conns = %w[internal] if conns.empty?
 
   conns.map{|c| CONNECTION_NAMES.fetch(c) }
 end
