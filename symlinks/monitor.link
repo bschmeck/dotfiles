@@ -23,6 +23,8 @@ class XRandR
                 "--same-as"
               elsif location == :right
                 "--right-of"
+              elsif location == :above
+                "--above"
               else
                 raise ArgumentError, "Unsupported location #{location}"
               end
@@ -119,7 +121,8 @@ end
 
 HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true, crtc_number: 2)
 LAPTOP = Monitor.new("eDP-1", "1920x1080", primary: true)
-WORK = Monitor.new("HDMI-2", "3440x1440", location: :right, primary: false)
+WORK = Monitor.new("HDMI-2", "2560x1440", location: :left, primary: true)
+TV = Monitor.new("HDMI-2", "1920x1080", location: :above, primary: false)
 
 if ARGV[0] == "home"
   HOME.on
@@ -128,6 +131,7 @@ elsif ARGV[0] == "mirror"
 elsif ARGV[0] == "single"
   WORK.off
   HOME.off
+  TV.off
   LAPTOP.on
 elsif ARGV[0] == "toggle"
   WORK.toggle
@@ -137,4 +141,6 @@ elsif ARGV[0] == "work"
 elsif ARGV[0] == "hdmi"
   HOME.on
   LAPTOP.off
+elsif ARGV[0] == "tv"
+  TV.on
 end
