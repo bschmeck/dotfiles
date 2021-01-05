@@ -22,3 +22,5 @@ alias appserver='python /home/bschmeck/appengine/dev_appserver.py'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias list-wifi='nmcli -f in-use,ssid,bssid,mode,chan,rate,signal device wifi list'
