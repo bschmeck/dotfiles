@@ -3,6 +3,7 @@
 CONNECTION_NAMES = {
   "amex" => "Kenna Amex",
   "boa" => "Kenna BoA",
+  "ds" => "Kenna Data Services",
   "gcp" => "Kenna GCP",
   "internal" => "Kenna Internal",
   "nyc3" => "Kenna NYC3",
@@ -10,14 +11,19 @@ CONNECTION_NAMES = {
 }
 
 def names_for(conns)
-  conns = %w[internal] if conns.empty?
+  conns = %w[ds internal] if conns.empty?
 
   conns.map{|c| CONNECTION_NAMES.fetch(c) }
 end
 
 def activate(*conns)
   names_for(conns).each do |name|
-    `echo push | nmcli --ask con up '#{name}'`
+    prefix = if name == "Kenna Data Services"
+               ""
+             else
+               "echo push | "
+             end
+    `#{prefix}nmcli --ask con up '#{name}'`
   end
 end
 
