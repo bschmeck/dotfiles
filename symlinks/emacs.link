@@ -51,7 +51,17 @@
 (ivy-mode)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
-
+(defun shmk/ivy--regex-dashes (str)
+  "Build a regex sequence from STR.
+Insert .* before each -."
+  (let ((subs (split-string str "-")))
+    (if (= (length subs) 1)
+        (ivy--regex str)
+      (ivy--regex (concat "^" (string-join subs "[[:alnum:]]*-"))))))
+(setq ivy-re-builders-alist
+      '((execute-extended-command . shmk/ivy--regex-dashes)
+        (t . ivy--regex-plus)))
+(ivy-prescient-mode)
 ;;(require 'evil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -427,12 +437,13 @@
  '(git-commit-finish-query-functions (quote nil))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(ivy-mode t)
  '(js2-basic-offset 4)
  '(magit-diff-arguments (quote ("--ignore-space-change" "--no-ext-diff" "-U1")))
  '(magit-status-show-tags nil)
  '(package-selected-packages
    (quote
-    (ivy yaml-mode git-timemachine git-link flymake-go go-mode ag ## direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
+    (ivy-prescient prescient ivy yaml-mode git-timemachine git-link flymake-go go-mode ag ## direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
  '(rails-rake-use-bundler-when-possible nil)
  '(vc-follow-symlinks t)
  '(which-function-mode t)
