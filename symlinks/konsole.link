@@ -1,5 +1,22 @@
 #! /usr/bin/env ruby
 
+def translate(subdomain)
+  aliases = {
+    "amex" => "blue",
+    "eu" => "eu-central-1.aws.kenna",
+    "hsbc" => "csvm",
+    "rbc" => "cvm"
+  }
+
+  return subdomain unless aliases.key? subdomain
+
+  aliased = aliases[subdomain]
+
+  puts "You asked for #{subdomain}.  Connecting to #{aliased}."
+
+  aliased
+end
+
 def get_integer_in_range(range, prompt)
   print prompt
   input = Integer(STDIN.gets.chomp)
@@ -29,7 +46,7 @@ if ARGV.count != 1
   exit 1
 end
 
-subdomain = ARGV[0]
+subdomain = translate(ARGV[0])
 
 step_hosts = `step ssh hosts`
 
