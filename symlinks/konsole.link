@@ -1,0 +1,49 @@
+#! /usr/bin/env ruby
+
+def get_integer_in_range(range, prompt)
+  print prompt
+  input = Integer(STDIN.gets.chomp)
+  raise unless range === input
+
+  input
+rescue
+  puts "Invalid value.  Please try again."
+  get_integer_in_range(range, prompt)
+end
+
+def get_host(hosts)
+  return hosts.first if hosts.count == 1
+
+  hosts.each_with_index do |host, i|
+    puts "[#{i}] #{host}"
+  end
+  puts "[#{hosts.count}] Quit"
+
+  choice = get_integer_in_range(0..hosts.size, "Which host? ")
+
+  hosts[choice]
+end
+
+if ARGV.count != 1
+  puts "The only accepted parameter is a KPD subdomain"
+  exit 1
+end
+
+subdomain = ARGV[0]
+
+step_hosts = `step ssh hosts`
+
+hostnames = step_hosts.lines.map{|line| line.split.first }
+matches = hostnames.grep(%r{\.#{subdomain}\.}).select{|host| host.start_with? "conduit-console" }
+
+if matches.count > 10
+  puts "Too many matching hosts.  Here are the first 10:"
+  puts matches.first(10)
+  exit 1
+end
+
+host = get_host(matches)
+
+exit unless host
+
+exec("ssh #{host}")
