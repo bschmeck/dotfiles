@@ -50,8 +50,17 @@ subdomain = translate(ARGV[0])
 
 step_hosts = `step ssh hosts`
 
-hostnames = step_hosts.lines.map{|line| line.split.first }
-matches = hostnames.grep(%r{\.#{subdomain}\.}).select{|host| host.start_with? "conduit-console" }
+matches = step_hosts
+            .lines
+            .map{|line| line.split.first }
+            .grep(%r{\.#{subdomain}\.})
+            .select{|host| host.start_with? "conduit-console" }
+            .uniq
+
+if matches.empty?
+  puts "Unable to find a matching host."
+  exit 1
+end
 
 if matches.count > 10
   puts "Too many matching hosts.  Here are the first 10:"
