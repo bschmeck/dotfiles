@@ -17,6 +17,7 @@
 ;; * direnv
 ;; * git-link
 ;; * ivy
+;; * fira-code-mode  (then run M-x fira-code-mode-install-fonts)
 ;;
 ;; From Github:
 ;; * solarized (from github/sellout in .emacs.d/themes)
