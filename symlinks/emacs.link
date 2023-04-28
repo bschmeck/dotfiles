@@ -292,6 +292,8 @@ Insert .* before each -."
 ;; ========== Navigation Shortcuts ======================
 (global-set-key (kbd "M-g") 'goto-line)   ; use Meta-g for goto-line
 (global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "s-<up>") #'beginning-of-buffer)
+(global-set-key (kbd "s-<down>") #'end-of-buffer)
 
 ;; ========== Fira Code ================================
 ;; UTF-8 Ligatures for code
