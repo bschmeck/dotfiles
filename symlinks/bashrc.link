@@ -50,6 +50,7 @@ done
 
 export PS1="\[\033]0;\$TERMTITLE\007\]\[\033[00;$HOST_COLOR\]\n\u@\h\[\033[00m\]\n\[\033[00;$PROMPT_COLOR\]\$(__git_ps1 \"[%s] \")\w\[\033[00m\] > "
 
+export PATH="$HOME/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
