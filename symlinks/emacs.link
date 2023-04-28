@@ -81,6 +81,7 @@ Insert .* before each -."
 
 (global-set-key "\C-a" 'back-to-indentation)
 (global-set-key "\M-m" 'move-beginning-of-line)
+(global-set-key "\M-i" 'imenu)
 
 ;; ===== Ruby ==========
 (require 'ruby-mode)
