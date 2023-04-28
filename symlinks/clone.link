@@ -28,7 +28,7 @@ dir = "~/src/#{repo}"
 
 
 
-user_email = choose(%w(bschmeck@kennasecurity.com ben.schmeckpeper@gmail.com))
+user_email = choose(%w(bschmeck@meraki.com ben.schmeckpeper@gmail.com bschmeck@kennasecurity.com))
 
 puts "Clone #{user}/#{repo} into #{dir} as #{user_email}"
 
