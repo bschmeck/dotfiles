@@ -436,21 +436,20 @@ Insert .* before each -."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" default)))
+   '("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" default))
  '(fill-column 80)
- '(frame-background-mode (quote light))
- '(git-commit-finish-query-functions (quote nil))
+ '(frame-background-mode 'light)
+ '(git-commit-finish-query-functions 'nil)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ivy-mode t)
  '(js2-basic-offset 4)
- '(magit-diff-arguments (quote ("--ignore-space-change" "--no-ext-diff" "-U1")))
+ '(magit-diff-arguments '("--ignore-space-change" "--no-ext-diff" "-U1"))
  '(magit-status-show-tags nil)
  '(package-selected-packages
-   (quote
-    (ivy-prescient prescient ivy yaml-mode git-timemachine git-link flymake-go go-mode ag ## direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode)))
+   '(ripgrep scala-mode fira-code-mode ivy-prescient prescient ivy yaml-mode git-timemachine git-link flymake-go go-mode ag ## direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode))
  '(rails-rake-use-bundler-when-possible nil)
+ '(tramp-use-ssh-controlmaster-options nil)
  '(vc-follow-symlinks t)
  '(which-function-mode t)
  '(winner-mode t))
