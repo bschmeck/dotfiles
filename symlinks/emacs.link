@@ -430,6 +430,8 @@ Insert .* before each -."
 (add-hook 'prog-mode-hook
           #'add-fira-code-symbol-keywords)
 
+(setq vc-handled-backends '(Git))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
