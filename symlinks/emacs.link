@@ -196,7 +196,9 @@ Insert .* before each -."
     (browse-url pr-url)))
 (eval-after-load 'magit
   '(define-key magit-mode-map "V"
-    #'endless/visit-pull-request-url))
+     #'endless/visit-pull-request-url))
+(transient-insert-suffix 'magit-push "p"
+  '("i" magit-push-implicitly))
 
 ;; ===== JavaScript ====
 ;; https://github.com/mooz/js2-mode
