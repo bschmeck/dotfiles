@@ -9,7 +9,6 @@
 ;; * projectile-rails
 ;; * yasnippet
 ;; * js2-mode
-;; * coffee-mode
 ;; * python-mode
 ;; * elixir-mode
 ;; * evil
@@ -20,7 +19,7 @@
 ;; * fira-code-mode  (then run M-x fira-code-mode-install-fonts)
 ;;
 ;; From Github:
-;; * solarized (from github/sellout in .emacs.d/themes)
+;; * solarized (from sellout/emacs-color-theme-solarized in .emacs.d/themes)
 ;; * rcodetools.el (in .emacs.d/lisp)
 ;; * rspec-mode (from github/bschmeck in .emacs.d/lisp)
 ;; * yari (from github/hron/yari.el in .emacs.d/lisp)
@@ -170,7 +169,7 @@ Insert .* before each -."
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq magit-push-always-verify nil)
-(setq magit-branch-arguments (remove "--track" magit-branch-arguments))
+;; (setq magit-branch-arguments (remove "--track" magit-branch-arguments))
 (defun endless/visit-pull-request-url (arg)
   "Visit the current branch's PR on Github."
   (interactive "P")
@@ -209,9 +208,6 @@ Insert .* before each -."
 (defun my-js2-mode-hook ()
   (set-variable 'indent-tabs-mode nil))
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
-
-;; ===== CoffeeScript ======
-(require 'coffee-mode)
 
 ;; ===== Python =====
 (autoload 'python-mode "python-mode" "Python Mode." t)
