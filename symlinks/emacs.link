@@ -506,6 +506,8 @@ Insert .* before each -."
 
 (setq initial-major-mode 'ruby-mode)
 
+(global-set-key [remap dabbrev-expand] 'hippie_expand)
+
 (display-time)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
