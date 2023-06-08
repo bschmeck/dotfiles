@@ -291,6 +291,32 @@ Insert .* before each -."
 (global-set-key (kbd "s-<up>") #'beginning-of-buffer)
 (global-set-key (kbd "s-<down>") #'end-of-buffer)
 
+;; ========= Meraki =========
+(defun toggle-dev-box ()
+       "Flip between current file on the dev box and locally"
+       (interactive)
+       (let ((current_file (buffer-file-name))
+             (local_prefix "/Users/bschmeck/src/manage/")
+             (remote_prefix "/ssh:dev:/home/bschmeck/co/manage/"))
+         (cond ((string-prefix-p local_prefix current_file) (meraki-visit-on-dev-box))
+               ((string-prefix-p remote_prefix current_file) (meraki-visit-locally)))))
+(defun meraki-visit-on-dev-box ()
+       "Open a buffer for the current file on the dev box"
+       (interactive)
+       (let ((current_file (buffer-file-name))
+             (local_prefix "/Users/bschmeck/src/manage/")
+             (remote_prefix "/ssh:dev:/home/bschmeck/co/manage/"))
+             (if (string-prefix-p local_prefix current_file)
+                 (find-file (concat remote_prefix (string-remove-prefix local_prefix current_file))))))
+(defun meraki-visit-locally ()
+       "Open a buffer for the current file on the dev box"
+       (interactive)
+       (let ((current_file (buffer-file-name))
+             (local_prefix "/Users/bschmeck/src/manage/")
+             (remote_prefix "/ssh:dev:/home/bschmeck/co/manage/"))
+             (if (string-prefix-p remote_prefix current_file)
+                 (find-file (concat local_prefix (string-remove-prefix remote_prefix current_file))))))
+
 ;; ========== Fira Code ================================
 ;; UTF-8 Ligatures for code
 ;; From https://gist.github.com/mordocai/50783defab3c3d1650e068b4d1c91495
