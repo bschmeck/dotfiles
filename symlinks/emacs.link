@@ -453,6 +453,7 @@ Insert .* before each -."
 (add-hook 'prog-mode-hook
           #'add-fira-code-symbol-keywords)
 
+;; Trying to speed up TRAMP.  We're only concerned with Git, so turn off the other VC backends.
 (setq vc-handled-backends '(Git))
 
 (custom-set-variables
@@ -473,7 +474,12 @@ Insert .* before each -."
  '(magit-status-show-tags nil)
  '(package-selected-packages
    '(projectile-ripgrep rg ripgrep scala-mode fira-code-mode ivy-prescient prescient ivy yaml-mode git-timemachine git-link flymake-go go-mode ag ## direnv company evil elixir-mode rspec-mode projectile-rails projectile yasnippet web-mode ruby-end python-mode magit js2-mode inf-ruby coffee-mode))
+ '(projectile-rails-fixture-dirs '("spec/factories/"))
+ '(projectile-rails-javascript-dirs nil)
+ '(projectile-rails-stylesheet-dirs nil)
  '(rails-rake-use-bundler-when-possible nil)
+ '(tramp-remote-path
+   '(tramp-default-remote-path "/usr/bin" "/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"))
  '(tramp-use-ssh-controlmaster-options nil)
  '(vc-follow-symlinks t)
  '(which-function-mode t)
