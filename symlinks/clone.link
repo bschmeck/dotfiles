@@ -26,9 +26,11 @@ user, repo = ARGV[0].split "/"
 github_uri = "git@github.com:#{user}/#{repo}"
 dir = "~/src/#{repo}"
 
-
-
-user_email = choose(%w(bschmeck@meraki.com ben.schmeckpeper@gmail.com bschmeck@kennasecurity.com))
+user_email = if user == "empiricalsec"
+               "ben@empiricalsecurity.com"
+             else
+               choose(%w(ben@empiricalsecurity.com ben.schmeckpeper@gmail.com))
+             end
 
 puts "Clone #{user}/#{repo} into #{dir} as #{user_email}"
 
