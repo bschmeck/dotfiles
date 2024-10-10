@@ -57,9 +57,9 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+k focus right
+bindsym $mod+l focus down
+bindsym $mod+semicolon focus up
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -86,7 +86,7 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -146,6 +146,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # dealing with multiple monitors
 bindsym $mod+x move workspace to output next; workspace back_and_forth
+bindsym $mod+z focus output left
+bindsym $mod+c focus output right
+bindsym $mod+f exec /home/bschmeck/bin/i3-display-swap.rb
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -190,6 +193,8 @@ mode "outputs" {
 
 bindsym $mod+o mode "outputs"
 
+bindsym $mod+Print exec flameshot gui --clipboard
+
 # Media keys
 bindsym $mod+F1 exec --no-startup-id amixer set Master toggle
 #bindcode 121 --no-startup-id amixer set Master toggle
@@ -201,4 +206,5 @@ bar {
         status_command i3status
 }
 
-for_window [title="^zoom$"] floating enable
+assign [class="^zoom$"] $ws3
+assign [class="^slack$"] $ws1
