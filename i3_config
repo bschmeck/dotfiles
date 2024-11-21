@@ -195,6 +195,8 @@ bindsym $mod+o mode "outputs"
 
 bindsym $mod+Print exec flameshot gui --clipboard
 
+bindsym $mod+Shift+z exec i3lock
+
 # Media keys
 bindsym $mod+F1 exec --no-startup-id amixer set Master toggle
 #bindcode 121 --no-startup-id amixer set Master toggle
