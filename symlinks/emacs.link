@@ -139,6 +139,13 @@ Insert .* before each -."
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
+(defun recompile-rspec ()
+  (interactive)
+  (let ((process-environment (cons "RUBY_DEBUG_NO_RELINE=true" process-environment)))
+    (recompile))
+)
+(define-key compilation-mode-map (kbd "g") 'recompile-rspec)
+
 ;; ===== Elixir ======
 (require 'alchemist)
 (add-hook 'elixir-mode-hook
