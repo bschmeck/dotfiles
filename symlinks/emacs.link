@@ -139,12 +139,12 @@ Insert .* before each -."
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-(defun recompile-rspec ()
-  (interactive)
-  (let ((process-environment (cons "RUBY_DEBUG_NO_RELINE=true" process-environment)))
-    (recompile))
-)
-(define-key compilation-mode-map (kbd "g") 'recompile-rspec)
+(defun disable-ruby-autocomplete (wrapped-function &rest args)
+  (if (string= (buffer-name) "*rspec-compilation*")
+      (let ((process-environment (cons "RUBY_DEBUG_NO_RELINE=true" process-environment)))
+        (apply wrapped-function args))
+    (apply wrapped-function args)))
+(advice-add 'recompile :around #'disable-ruby-autocomplete)
 
 ;; ===== Elixir ======
 (require 'alchemist)
