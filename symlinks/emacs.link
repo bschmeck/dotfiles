@@ -232,6 +232,8 @@ Insert .* before each -."
 ;;(load "/home/bschmeck/.emacs.d/python-mode.el-6.0.3/python-mode.el")
 (require 'python-mode)
 
+(define-key python-mode-map (kbd "C-c t") 'python-pytest-file)
+
 (defun bash ()
   "Start 'bash' shell."
   (let ((binary-process-input t)
