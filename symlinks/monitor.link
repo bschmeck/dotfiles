@@ -119,8 +119,8 @@ class Monitor
   end
 end
 
-HOME = Monitor.new("HDMI-2", "1920x1080", location: :left, primary: true, crtc_number: 2)
-LAPTOP = Monitor.new("eDP-1", "1920x1080", primary: true)
+HOME = Monitor.new("HDMI-1", "2560x1440", location: :left, primary: true)
+LAPTOP = Monitor.new("eDP-1", "1920x1200", primary: true)
 WORK = Monitor.new("HDMI-2", "2560x1440", location: :left, primary: true)
 TV = Monitor.new("HDMI-2", "1920x1080", location: :above, primary: false)
 
@@ -143,4 +143,6 @@ elsif ARGV[0] == "hdmi"
   LAPTOP.off
 elsif ARGV[0] == "tv"
   TV.on
+else
+  STDERR.puts "Uknown command: #{ARGV[0]}"
 end
