@@ -122,7 +122,7 @@ end
 HOME = Monitor.new("HDMI-1", "2560x1440", location: :left, primary: true)
 LAPTOP = Monitor.new("eDP-1", "1920x1200", primary: true)
 WORK = Monitor.new("HDMI-2", "2560x1440", location: :left, primary: true)
-TV = Monitor.new("HDMI-2", "1920x1080", location: :above, primary: false)
+TV = Monitor.new("HDMI-1", "1920x1080", location: :above, primary: false)
 
 if ARGV[0] == "home"
   HOME.on
